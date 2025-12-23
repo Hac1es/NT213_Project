@@ -16,6 +16,6 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Quan trọng: để thanh cuộn do HomeView quản lý, không phải do body */
+  overflow: auto;
 }
 </style>

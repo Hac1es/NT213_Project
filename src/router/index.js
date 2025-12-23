@@ -1,12 +1,24 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LandingPage from "../pages/LandingPage.vue";
-import MainPage from "../pages/Main.vue";
 import HomeView from "../pages/HomeView.vue";
+import InputPage from "../pages/Input.vue";
+import MainPage from "../pages/Main.vue";
 
 const routes = [
   { path: "/", name: "Home", component: HomeView },
-  { path: "/", name: "Landing", component: LandingPage },
-  { path: "/main", name: "Main", component: MainPage },
+  { path: "/input", name: "Input", component: InputPage },
+  {
+    path: "/main",
+    name: "Main",
+    component: MainPage,
+    // Chuyển query từ URL thành prop 'config' cho component Main.vue
+    props: (route) => ({
+      config: {
+        targetApp: route.query.targetApp,
+        auditorName: route.query.auditorName,
+        level: route.query.level || 1,
+      },
+    }),
+  },
 ];
 
 const router = createRouter({
