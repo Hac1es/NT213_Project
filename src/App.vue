@@ -1,15 +1,16 @@
 <script setup>
-import { NConfigProvider } from "naive-ui";
+import { NConfigProvider, NMessageProvider } from "naive-ui";
 </script>
 
 <template>
   <NConfigProvider>
-    <router-view />
+    <NMessageProvider>
+      <router-view />
+    </NMessageProvider>
   </NConfigProvider>
 </template>
 
 <style>
-/* Đảm bảo html và body chiếm hết màn hình để tính năng scroll hoạt động tốt */
 html,
 body,
 #app {

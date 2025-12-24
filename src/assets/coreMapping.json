@@ -1,0 +1,911 @@
+[
+  {
+    "aspect": "Software Environment",
+    "criteria": [
+      {
+        "criterion": "Communication Hardening",
+        "elements": [
+          {
+            "element": "HTTP Request Header Validation",
+            "mechanisms": [
+              {
+                "mechanism": "Request headers — Accept validation",
+                "requirements": ["V14.5.1"]
+              },
+              {
+                "mechanism": "Request headers — general validation",
+                "requirements": ["V14.5.2", "V14.5.3", "V14.5.4"]
+              }
+            ]
+          },
+          {
+            "element": "HTTP Security Headers",
+            "mechanisms": [
+              {
+                "mechanism": "Response headers — CSP",
+                "requirements": ["V14.4.3"]
+              },
+              {
+                "mechanism": "Response headers — MIME sniffing",
+                "requirements": ["V14.4.4"]
+              },
+              {
+                "mechanism": "Response headers — clickjacking",
+                "requirements": ["V14.4.7"]
+              },
+              {
+                "mechanism": "Response headers — general",
+                "requirements": ["V14.4.1", "V14.4.2", "V14.4.5", "V14.4.6"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Configuration Hardening",
+        "elements": [
+          {
+            "element": "Dependency Management",
+            "mechanisms": [
+              {
+                "mechanism": "Dependency inventory management",
+                "requirements": [
+                  "V14.2.1",
+                  "V14.2.2",
+                  "V14.2.3",
+                  "V14.2.4",
+                  "V14.2.5",
+                  "V14.2.6"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Unintended Security Disclosure",
+            "mechanisms": [
+              {
+                "mechanism": "Debug/stack trace suppression",
+                "requirements": ["V14.3.2"]
+              },
+              {
+                "mechanism": "Version disclosure prevention",
+                "requirements": ["V14.3.3"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Environment Management",
+        "elements": [
+          {
+            "element": "Environment Controls",
+            "mechanisms": [
+              {
+                "mechanism": "Environment Controls — controls",
+                "requirements": ["V14.1.3", "V14.1.5"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "aspect": "Software Process",
+    "criteria": [
+      {
+        "criterion": "General Practice",
+        "elements": [
+          {
+            "element": "Secure SDLC Governance",
+            "mechanisms": [
+              {
+                "mechanism": "Secure SDLC Governance — controls",
+                "requirements": [
+                  "V1.1.1",
+                  "V1.1.4",
+                  "V1.1.5",
+                  "V1.1.6",
+                  "V1.10.1",
+                  "V1.11.1",
+                  "V1.11.2",
+                  "V1.11.3",
+                  "V1.12.2",
+                  "V1.14.1",
+                  "V1.14.6",
+                  "V1.2.1",
+                  "V1.2.2",
+                  "V1.2.3",
+                  "V1.2.4",
+                  "V1.4.1",
+                  "V1.4.4",
+                  "V1.4.5",
+                  "V1.5.2",
+                  "V1.5.3",
+                  "V1.6.1",
+                  "V1.6.2",
+                  "V1.6.3",
+                  "V1.6.4",
+                  "V1.7.1",
+                  "V1.7.2",
+                  "V1.8.1",
+                  "V1.9.1",
+                  "V1.9.2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Secure Build and Deployment",
+        "elements": [
+          {
+            "element": "Build & Deployment Process",
+            "mechanisms": [
+              {
+                "mechanism": "Build & Deployment Process — controls",
+                "requirements": [
+                  "V1.14.2",
+                  "V1.14.3",
+                  "V1.14.4",
+                  "V1.14.5",
+                  "V14.1.1",
+                  "V14.1.4"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Secure Coding",
+        "elements": [
+          {
+            "element": "Secure Coding Standards",
+            "mechanisms": [
+              {
+                "mechanism": "Secure Coding Standards — controls",
+                "requirements": ["V1.5.4"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Secure Design",
+        "elements": [
+          {
+            "element": "Threat Modeling & Architecture Review",
+            "mechanisms": [
+              {
+                "mechanism": "Threat Modeling & Architecture Review — controls",
+                "requirements": ["V1.1.2"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Security Requirement",
+        "elements": [
+          {
+            "element": "Security Requirements",
+            "mechanisms": [
+              {
+                "mechanism": "Security Requirements — controls",
+                "requirements": ["V1.1.3", "V1.1.7", "V1.5.1", "V1.8.2"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "aspect": "Software Structure",
+    "criteria": [
+      {
+        "criterion": "Access Control",
+        "elements": [
+          {
+            "element": "Access Control Architecture",
+            "mechanisms": [
+              {
+                "mechanism": "Authorization model & enforcement",
+                "requirements": ["V4.1.2", "V4.1.5"]
+              },
+              {
+                "mechanism": "Least privilege enforcement",
+                "requirements": ["V1.4.3", "V4.1.3", "V4.1.4"]
+              },
+              {
+                "mechanism": "Trusted-service authorization enforcement",
+                "requirements": ["V4.1.1"]
+              }
+            ]
+          },
+          {
+            "element": "HTTP Request Access Control",
+            "mechanisms": [
+              {
+                "mechanism": "Request/endpoint authorization enforcement",
+                "requirements": ["V13.1.2", "V4.3.1", "V4.3.2", "V4.3.3"]
+              }
+            ]
+          },
+          {
+            "element": "Operation Level Access Control",
+            "mechanisms": [
+              {
+                "mechanism": "IDOR protection",
+                "requirements": ["V4.2.1"]
+              },
+              {
+                "mechanism": "Operation authorization enforcement",
+                "requirements": ["V4.2.2"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Authentication",
+        "elements": [
+          {
+            "element": "Authentication Logging",
+            "mechanisms": [
+              {
+                "mechanism": "Authentication logging — OTP events",
+                "requirements": ["V2.8.5", "V2.8.6"]
+              },
+              {
+                "mechanism": "Authentication logging — failure events",
+                "requirements": ["V2.2.1"]
+              },
+              {
+                "mechanism": "Authentication logging — general",
+                "requirements": ["V2.2.3"]
+              }
+            ]
+          },
+          {
+            "element": "Authenticator Security",
+            "mechanisms": [
+              {
+                "mechanism": "Authenticator security mechanism",
+                "requirements": ["V2.2.2", "V2.3.2", "V2.3.3"]
+              },
+              {
+                "mechanism": "Brute-force protection",
+                "requirements": ["V2.2.5"]
+              },
+              {
+                "mechanism": "Cryptographic verifier security",
+                "requirements": ["V2.9.1", "V2.9.2", "V2.9.3"]
+              },
+              {
+                "mechanism": "Look-up secret security",
+                "requirements": ["V2.6.1", "V2.6.2", "V2.6.3"]
+              },
+              {
+                "mechanism": "OTP verifier security",
+                "requirements": [
+                  "V2.2.6",
+                  "V2.2.7",
+                  "V2.8.1",
+                  "V2.8.2",
+                  "V2.8.3",
+                  "V2.8.4",
+                  "V2.8.7"
+                ]
+              },
+              {
+                "mechanism": "Out-of-band verifier security",
+                "requirements": [
+                  "V2.7.1",
+                  "V2.7.2",
+                  "V2.7.3",
+                  "V2.7.4",
+                  "V2.7.5",
+                  "V2.7.6"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Credential Recovery",
+            "mechanisms": [
+              {
+                "mechanism": "Credential recovery mechanism",
+                "requirements": [
+                  "V2.5.1",
+                  "V2.5.2",
+                  "V2.5.3",
+                  "V2.5.4",
+                  "V2.5.5",
+                  "V2.5.7"
+                ]
+              },
+              {
+                "mechanism": "Recovery token handling",
+                "requirements": ["V2.5.6"]
+              }
+            ]
+          },
+          {
+            "element": "Credential Storage",
+            "mechanisms": [
+              {
+                "mechanism": "Password hashing mechanism",
+                "requirements": ["V2.4.3", "V2.4.4"]
+              },
+              {
+                "mechanism": "Salt/pepper handling",
+                "requirements": ["V2.4.1", "V2.4.2", "V2.4.5"]
+              }
+            ]
+          },
+          {
+            "element": "Multi Factor Authentication",
+            "mechanisms": [
+              {
+                "mechanism": "MFA verification",
+                "requirements": ["V2.2.4"]
+              }
+            ]
+          },
+          {
+            "element": "Password Security",
+            "mechanisms": [
+              {
+                "mechanism": "Authentication architecture mechanism",
+                "requirements": ["V2.1.12", "V2.1.8"]
+              },
+              {
+                "mechanism": "Password changing functionality",
+                "requirements": ["V2.1.5", "V2.1.6"]
+              },
+              {
+                "mechanism": "Password input functionality",
+                "requirements": ["V2.1.11"]
+              },
+              {
+                "mechanism": "Password processing logic",
+                "requirements": ["V2.1.3"]
+              },
+              {
+                "mechanism": "Password strength policy",
+                "requirements": [
+                  "V2.1.1",
+                  "V2.1.10",
+                  "V2.1.2",
+                  "V2.1.4",
+                  "V2.1.7",
+                  "V2.1.9",
+                  "V2.3.1"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Service Authentication",
+            "mechanisms": [
+              {
+                "mechanism": "API key authentication",
+                "requirements": ["V2.10.1", "V2.10.4"]
+              },
+              {
+                "mechanism": "Service authentication",
+                "requirements": ["V2.10.2", "V2.10.3"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Business Logic Security",
+        "elements": [
+          {
+            "element": "Business Logic Security",
+            "mechanisms": [
+              {
+                "mechanism": "Business Logic Security — controls",
+                "requirements": [
+                  "V11.1.1",
+                  "V11.1.2",
+                  "V11.1.3",
+                  "V11.1.4",
+                  "V11.1.5",
+                  "V11.1.6",
+                  "V11.1.7",
+                  "V11.1.8",
+                  "V13.2.4"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Communication",
+        "elements": [
+          {
+            "element": "Client Communication Security",
+            "mechanisms": [
+              {
+                "mechanism": "Client Communication Security — controls",
+                "requirements": ["V9.1.1", "V9.1.2", "V9.1.3"]
+              }
+            ]
+          },
+          {
+            "element": "Server Communication Security",
+            "mechanisms": [
+              {
+                "mechanism": "Server Communication Security — controls",
+                "requirements": [
+                  "V9.2.1",
+                  "V9.2.2",
+                  "V9.2.3",
+                  "V9.2.4",
+                  "V9.2.5"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Cryptography",
+        "elements": [
+          {
+            "element": "Algorithms",
+            "mechanisms": [
+              {
+                "mechanism": "Algorithms — controls",
+                "requirements": [
+                  "V6.2.1",
+                  "V6.2.3",
+                  "V6.2.5",
+                  "V6.2.7",
+                  "V6.2.8"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Random Values",
+            "mechanisms": [
+              {
+                "mechanism": "Random Values — controls",
+                "requirements": [
+                  "V6.2.2",
+                  "V6.2.4",
+                  "V6.2.6",
+                  "V6.3.1",
+                  "V6.3.2",
+                  "V6.3.3",
+                  "V6.4.1",
+                  "V6.4.2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Error Handling and Logging",
+        "elements": [
+          {
+            "element": "Error Handling",
+            "mechanisms": [
+              {
+                "mechanism": "Error Handling — controls",
+                "requirements": ["V14.3.1", "V7.4.1", "V7.4.2", "V7.4.3"]
+              }
+            ]
+          },
+          {
+            "element": "Log Content",
+            "mechanisms": [
+              {
+                "mechanism": "Log Content — controls",
+                "requirements": ["V7.1.1", "V7.1.2", "V7.1.3", "V7.1.4"]
+              }
+            ]
+          },
+          {
+            "element": "Log Processing",
+            "mechanisms": [
+              {
+                "mechanism": "Log Processing — controls",
+                "requirements": ["V7.2.1", "V7.2.2"]
+              }
+            ]
+          },
+          {
+            "element": "Log Protection",
+            "mechanisms": [
+              {
+                "mechanism": "Log Protection — controls",
+                "requirements": ["V7.3.1", "V7.3.2", "V7.3.3", "V7.3.4"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Files and Resources Security",
+        "elements": [
+          {
+            "element": "File Download",
+            "mechanisms": [
+              {
+                "mechanism": "File Download — controls",
+                "requirements": ["V12.5.1"]
+              }
+            ]
+          },
+          {
+            "element": "File Execution",
+            "mechanisms": [
+              {
+                "mechanism": "File Execution — controls",
+                "requirements": [
+                  "V12.3.1",
+                  "V12.3.2",
+                  "V12.3.3",
+                  "V12.3.4",
+                  "V12.3.5",
+                  "V12.3.6"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "File Integrity",
+            "mechanisms": [
+              {
+                "mechanism": "File Integrity — controls",
+                "requirements": ["V12.2.1"]
+              }
+            ]
+          },
+          {
+            "element": "File Storage",
+            "mechanisms": [
+              {
+                "mechanism": "File Storage — controls",
+                "requirements": ["V1.12.1", "V12.4.1"]
+              }
+            ]
+          },
+          {
+            "element": "File Upload",
+            "mechanisms": [
+              {
+                "mechanism": "File Upload — controls",
+                "requirements": [
+                  "V12.1.1",
+                  "V12.1.2",
+                  "V12.1.3",
+                  "V12.4.2",
+                  "V12.5.2"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "SSRF Protection",
+            "mechanisms": [
+              {
+                "mechanism": "SSRF Protection — controls",
+                "requirements": ["V12.6.1"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Input Validation and Output Encoding",
+        "elements": [
+          {
+            "element": "Input Validation",
+            "mechanisms": [
+              {
+                "mechanism": "Input Validation — controls",
+                "requirements": [
+                  "V5.1.1",
+                  "V5.1.2",
+                  "V5.1.3",
+                  "V5.1.4",
+                  "V5.1.5",
+                  "V5.2.6",
+                  "V5.3.10",
+                  "V5.3.4",
+                  "V5.3.6",
+                  "V5.3.7",
+                  "V5.3.9",
+                  "V5.5.1",
+                  "V5.5.2",
+                  "V5.5.3",
+                  "V5.5.4"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Output Encoding and Injection Prevention",
+            "mechanisms": [
+              {
+                "mechanism": "Output Encoding and Injection Prevention — controls",
+                "requirements": [
+                  "V5.2.7",
+                  "V5.3.1",
+                  "V5.3.2",
+                  "V5.3.3",
+                  "V5.3.5",
+                  "V5.3.8"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Sanitization and Sandboxing",
+            "mechanisms": [
+              {
+                "mechanism": "Sanitization and Sandboxing — controls",
+                "requirements": [
+                  "V5.2.1",
+                  "V5.2.2",
+                  "V5.2.3",
+                  "V5.2.4",
+                  "V5.2.5",
+                  "V5.2.8"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Intrusion Detection and Prevention",
+        "elements": [
+          {
+            "element": "Application Integrity",
+            "mechanisms": [
+              {
+                "mechanism": "Application Integrity — controls",
+                "requirements": ["V10.3.1", "V10.3.2", "V10.3.3"]
+              }
+            ]
+          },
+          {
+            "element": "Code Integrity",
+            "mechanisms": [
+              {
+                "mechanism": "Code Integrity — controls",
+                "requirements": ["V10.1.1"]
+              }
+            ]
+          },
+          {
+            "element": "Malicious Code Search",
+            "mechanisms": [
+              {
+                "mechanism": "Malicious Code Search — controls",
+                "requirements": [
+                  "V10.2.1",
+                  "V10.2.2",
+                  "V10.2.3",
+                  "V10.2.4",
+                  "V10.2.5",
+                  "V10.2.6"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Memory Management",
+        "elements": [
+          {
+            "element": "Build-time Memory Protections",
+            "mechanisms": [
+              {
+                "mechanism": "Build-time Memory Protections — controls",
+                "requirements": ["V14.1.2"]
+              }
+            ]
+          },
+          {
+            "element": "Memory, String, and Unmanaged Code",
+            "mechanisms": [
+              {
+                "mechanism": "Memory, String, and Unmanaged Code — controls",
+                "requirements": ["V5.4.1", "V5.4.2", "V5.4.3"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Privacy and Data Protection",
+        "elements": [
+          {
+            "element": "Client-side Data Protection",
+            "mechanisms": [
+              {
+                "mechanism": "Client-side Data Protection — controls",
+                "requirements": [
+                  "V8.1.1",
+                  "V8.1.2",
+                  "V8.2.1",
+                  "V8.2.2",
+                  "V8.2.3"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Data Classification",
+            "mechanisms": [
+              {
+                "mechanism": "Data Classification — controls",
+                "requirements": ["V6.1.1", "V6.1.2", "V6.1.3"]
+              }
+            ]
+          },
+          {
+            "element": "General Data Protection",
+            "mechanisms": [
+              {
+                "mechanism": "General Data Protection — controls",
+                "requirements": [
+                  "V8.1.3",
+                  "V8.1.4",
+                  "V8.1.5",
+                  "V8.1.6",
+                  "V8.3.3"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Sensitive Private Data",
+            "mechanisms": [
+              {
+                "mechanism": "Sensitive Private Data — controls",
+                "requirements": [
+                  "V8.3.1",
+                  "V8.3.2",
+                  "V8.3.4",
+                  "V8.3.5",
+                  "V8.3.6",
+                  "V8.3.7",
+                  "V8.3.8"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Session Management",
+        "elements": [
+          {
+            "element": "Cookie-based Session Management",
+            "mechanisms": [
+              {
+                "mechanism": "Cookie-based Session Management — controls",
+                "requirements": [
+                  "V3.2.3",
+                  "V3.4.1",
+                  "V3.4.2",
+                  "V3.4.3",
+                  "V3.4.4",
+                  "V3.4.5"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Defenses Against Session Management Exploits",
+            "mechanisms": [
+              {
+                "mechanism": "Defenses Against Session Management Exploits — controls",
+                "requirements": ["V3.7.1"]
+              }
+            ]
+          },
+          {
+            "element": "Federated Re-authentication",
+            "mechanisms": [
+              {
+                "mechanism": "Federated Re-authentication — controls",
+                "requirements": ["V3.6.1", "V3.6.2"]
+              }
+            ]
+          },
+          {
+            "element": "Session Termination",
+            "mechanisms": [
+              {
+                "mechanism": "Session Termination — controls",
+                "requirements": ["V3.3.2", "V3.3.3", "V3.3.4"]
+              }
+            ]
+          },
+          {
+            "element": "Token-based Session Management",
+            "mechanisms": [
+              {
+                "mechanism": "Token-based Session Management — controls",
+                "requirements": [
+                  "V3.1.1",
+                  "V3.2.1",
+                  "V3.2.2",
+                  "V3.2.4",
+                  "V3.3.1",
+                  "V3.5.1",
+                  "V3.5.2",
+                  "V3.5.3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Web Service and API Security",
+        "elements": [
+          {
+            "element": "Generic Web Service Security",
+            "mechanisms": [
+              {
+                "mechanism": "Generic Web Service Security — controls",
+                "requirements": ["V13.1.1", "V13.1.3", "V13.1.4", "V13.1.5"]
+              }
+            ]
+          },
+          {
+            "element": "GraphQL",
+            "mechanisms": [
+              {
+                "mechanism": "GraphQL — controls",
+                "requirements": ["V13.4.1", "V13.4.2"]
+              }
+            ]
+          },
+          {
+            "element": "RESTful Web Service",
+            "mechanisms": [
+              {
+                "mechanism": "RESTful Web Service — controls",
+                "requirements": [
+                  "V13.2.1",
+                  "V13.2.2",
+                  "V13.2.3",
+                  "V13.2.5",
+                  "V13.2.6"
+                ]
+              }
+            ]
+          },
+          {
+            "element": "SOAP Web Service",
+            "mechanisms": [
+              {
+                "mechanism": "SOAP Web Service — controls",
+                "requirements": ["V13.3.1", "V13.3.2"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

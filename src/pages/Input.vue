@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div class="mb-5">
+      <div class="mb-5 mt-8">
         <label class="text-gray-400 text-xl block mb-4"
           >Verification Level</label
         >
@@ -66,6 +66,71 @@
               {{ levelDescriptions[level] }}
             </p>
           </div>
+        </div>
+      </div>
+
+      <div class="mb-10 rounded-xl mt-8">
+        <h3 class="text-gray-400 text-xl mb-2">Aspect Importance Weights</h3>
+        <p class="text-gray-400 text-sm mb-6 italic">
+          Allocate the level of importance to the three evaluation criteria. The
+          total weighting must equal 100%.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <label class="text-gray-300 font-medium text-lg"
+                >Software Structure</label
+              >
+              <span class="text-[#63e2b7] font-bold text-lg"
+                >{{ assessmentData.weights.structure }}%</span
+              >
+            </div>
+            <n-slider
+              v-model:value="assessmentData.weights.structure"
+              :step="1"
+            />
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <label class="text-gray-300 font-medium text-lg"
+                >Software Environment</label
+              >
+              <span class="text-[#63e2b7] font-bold text-lg"
+                >{{ assessmentData.weights.environment }}%</span
+              >
+            </div>
+            <n-slider
+              v-model:value="assessmentData.weights.environment"
+              :step="1"
+            />
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <label class="text-gray-300 font-medium text-lg"
+                >Software Process</label
+              >
+              <span class="text-[#63e2b7] font-bold text-lg"
+                >{{ assessmentData.weights.process }}%</span
+              >
+            </div>
+            <n-slider
+              v-model:value="assessmentData.weights.process"
+              :step="1"
+            />
+          </div>
+        </div>
+
+        <div
+          v-if="totalWeight !== 100"
+          class="mt-6 text-red-400 text-sm flex items-center gap-2"
+        >
+          <span
+            >⚠️ The total weighting is currently {{ totalWeight }}%. Please
+            adjust it to 100%.</span
+          >
         </div>
       </div>
 
@@ -129,18 +194,25 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 import { useRouter } from "vue-router"; // Thêm router
+import { useAssessmentStore } from "../stores/assessmentStore";
+import { NInputNumber, NSlider, NSpace, NGrid, NGridItem } from "naive-ui";
 
 const router = useRouter();
-
+const store = useAssessmentStore();
 const emit = defineEmits(["start-assessment"]);
 
 // Dữ liệu đánh giá
 const assessmentData = reactive({
   targetApp: "",
   auditorName: "",
-  level: 1, // Mặc định là Level 1
+  level: 1,
+  weights: {
+    structure: 60,
+    environment: 30,
+    process: 10,
+  }, // Mặc định là Level 1
 });
 
 // Mô tả cho từng Level dựa trên tiêu chuẩn ASVS
@@ -150,6 +222,15 @@ const levelDescriptions = {
   3: "Advanced security for critical applications (Financial, Medical, or Critical Infrastructure).",
 };
 
+// Tính tổng để kiểm tra (phải bằng 100)
+const totalWeight = computed(() => {
+  return (
+    assessmentData.weights.structure +
+    assessmentData.weights.environment +
+    assessmentData.weights.process
+  );
+});
+
 // Hàm xử lý khi nhấn Start
 function handleStart() {
   if (!assessmentData.targetApp || !assessmentData.auditorName) {
@@ -157,15 +238,7 @@ function handleStart() {
     return;
   }
 
-  // Điều hướng bằng query thay vì params để tránh lỗi "Missing param"
-  // và giúp URL dễ đọc hơn khi người dùng nhấn Back/Forward
-  router.push({
-    name: "Main",
-    query: {
-      targetApp: assessmentData.targetApp,
-      auditorName: assessmentData.auditorName,
-      level: assessmentData.level,
-    },
-  });
+  store.setConfig(assessmentData); // Cất dữ liệu vào kho
+  router.push({ name: "Main" }); // Đi tay không sang trang Main
 }
 </script>
