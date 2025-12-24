@@ -1,15 +1,15 @@
 <template>
   <div>
-    <h1 class="text-[#63e2b7] text-4xl font-black">
+    <h1 class="text-[#63e2b7] text-3xl font-black">
       Detailed Hierarchical Analysis
     </h1>
     <div class="space-y-8 mt-6">
       <div v-for="aspect in chapterScores" :key="aspect.aspect">
-        <h3
-          class="text-[#10b981] font-bold text-xl mb-4 flex items-center gap-2 uppercase tracking-tight"
+        <p
+          class="text-[#10b981] font-bold text-lg mb-2 flex items-center gap-2 uppercase tracking-tight"
         >
           {{ aspect.aspect }}
-        </h3>
+        </p>
         <mainChart :aspectData="[aspect]" class="mb-6" />
         <n-collapse arrow-placement="right">
           <n-collapse-item
@@ -19,14 +19,16 @@
             :name="crit.name"
           >
             <template #header>
-              <span class="text-[#99F6E4] text-lg font-bold">{{
-                crit.name
-              }}</span>
+              <div class="flex-1 min-w-0">
+                <span class="text-[#99F6E4] text-base font-bold truncate">{{
+                  crit.name
+                }}</span>
+              </div>
             </template>
 
             <template #header-extra>
               <span
-                class="text-lg font-mono font-bold"
+                class="font-mono text-base font-bold shrink-0"
                 :class="crit.score >= 0.695 ? 'text-green-500' : 'text-red-500'"
                 >{{ crit.score.toFixed(2) }}</span
               >
@@ -38,16 +40,17 @@
                 :key="elem.name"
                 :title="elem.name"
                 :name="elem.name"
-                class="py-1"
               >
                 <template #header>
-                  <span class="text-[#CBD5E1] text-base font-bold">{{
-                    elem.name
-                  }}</span>
+                  <div class="flex-1 min-w-0">
+                    <span class="text-[#CBD5E1] text-sm font-bold truncate">{{
+                      elem.name
+                    }}</span>
+                  </div>
                 </template>
                 <template #header-extra>
                   <span
-                    class="text-base font-mono font-bold"
+                    class="text-sm font-mono font-bold shrink-0"
                     :class="
                       elem.score >= 0.695 ? 'text-green-500' : 'text-red-500'
                     "
@@ -57,7 +60,7 @@
                 </template>
 
                 <!-- Mechanism level collapse inside element -->
-                <n-collapse arrow-placement="right" class="ml-2">
+                <n-collapse arrow-placement="right">
                   <n-collapse-item
                     v-for="mech in elem.mechanismsDetails"
                     :key="mech.name"
@@ -65,13 +68,16 @@
                     :name="mech.name"
                   >
                     <template #header>
-                      <span class="text-[#94A3B8] text-sm font-bold">{{
-                        mech.name
-                      }}</span>
+                      <div class="flex-1 min-w-0">
+                        <span
+                          class="text-[#94A3B8] text-xs font-bold truncate"
+                          >{{ mech.name }}</span
+                        >
+                      </div>
                     </template>
                     <template #header-extra>
                       <span
-                        class="text-sm font-mono font-bold"
+                        class="text-xs font-mono font-bold shrink-0"
                         :class="
                           mech.score >= 0.695
                             ? 'text-green-500'
@@ -151,3 +157,67 @@ const getTagColor = (s) => {
   return map[s] ?? map[0];
 };
 </script>
+
+<style scoped>
+/* --- 1. TRIỆT TIÊU TOÀN BỘ BORDER MẶC ĐỊNH --- */
+:deep(.n-collapse) {
+  --n-item-margin: 0 !important;
+  --n-title-padding: 0 !important;
+  /* Xóa màu kẻ ngang mặc định của Naive UI */
+  --n-divider-color: transparent !important;
+}
+
+/* Xóa border của chính thẻ collapse-item */
+:deep(.n-collapse-item) {
+  border: none !important;
+}
+
+/* San phẳng & Xóa đường kẻ dọc phân cấp */
+:deep(.n-collapse .n-collapse) {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  border-left: none !important; /* XÓA ĐƯỜNG KẺ DỌC */
+}
+
+/* --- 2. LAYOUT: TIÊU ĐỀ -> MŨI TÊN ... ĐIỂM SỐ --- */
+
+:deep(.n-collapse-item__header) {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 12px 0 !important;
+  /* XÓA ĐƯỜNG KẺ NGANG DƯỚI HEADER */
+  border-bottom: none !important;
+}
+
+/* Khối bên trái: Tiêu đề + Mũi tên */
+:deep(.n-collapse-item__header-main) {
+  display: flex !important;
+  align-items: center !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+/* Mũi tên nằm sát sau tiêu đề */
+:deep(.n-collapse-item-arrow) {
+  margin-left: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Khối bên phải: Điểm số */
+:deep(.n-collapse-item__header-extra) {
+  margin-left: auto !important;
+  padding-left: 20px !important;
+  flex-shrink: 0 !important;
+}
+
+/* --- 3. FIX CHI TIẾT CONTENT --- */
+
+:deep(.n-collapse-item__content-inner) {
+  padding-left: 0 !important;
+  padding-top: 8px !important;
+  padding-bottom: 20px !important;
+  /* Đảm bảo nội dung không tự đẻ ra border top */
+  border-top: none !important;
+}
+</style>

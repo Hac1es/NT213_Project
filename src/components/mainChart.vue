@@ -97,7 +97,7 @@ const getChartOption = (aspectData) => {
 <template>
   <div class="space-y-12 w-full">
     <div v-for="aspect in chapterScores" :key="aspect.aspect">
-      <div style="width: 100%; height: 700px">
+      <div style="width: 100%; height: 550px">
         <v-chart :option="getChartOption(aspect)" autoresize />
       </div>
     </div>

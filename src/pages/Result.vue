@@ -5,24 +5,24 @@
         class="flex justify-between items-end mb-12 border-b border-gray-800 pb-8"
       >
         <div>
-          <h1 class="text-[#63e2b7] text-4xl font-black mb-2">FINAL REPORT</h1>
-          <p class="text-gray-400 text-lg italic">
+          <h1 class="text-[#63e2b7] text-3xl font-black mb-2">FINAL REPORT</h1>
+          <p class="text-gray-400 italic">
             Quantitative assessment for
             <span class="text-white font-bold">{{ config.targetApp }}</span>
           </p>
         </div>
-        <div class="text-right text-white text-lg font-mono">
+        <div class="text-right text-white font-mono">
           <p>Auditor: {{ config.auditorName }}</p>
           <p>ASVS Level: {{ config.level }}</p>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-5">
         <div
           class="p-8 rounded-3xl border border-[#63e2b7]/20 flex flex-col items-center justify-center relative overflow-hidden shadow-2xl"
         >
           <div
-            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#63e2b7] to-transparent"
+            class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-[#63e2b7] to-transparent"
           ></div>
 
           <span
@@ -72,7 +72,7 @@
                 <tr
                   v-for="item in chapterScores"
                   :key="item.aspect"
-                  class="group transition-colors hover:bg-white/[0.02]"
+                  class="group transition-colors hover:bg-white/5"
                 >
                   <td class="py-6">
                     <div class="flex flex-col gap-2">
@@ -120,7 +120,7 @@
           ghost
           text-color="#63E2B7"
           size="large"
-          class="h-12 font-semibold border border-[#2E3235] hover:(bg-[#1F2224] border-[#63E2B7] text-[#6AF5B3]) shadow-[inset_0_0_12px_#0D1512,0_0_6px_#0D1512] transition-all duration-300"
+          class="h-12 font-semibold border border-[#2E3235] hover:(bg-[#1F2224] text-[#6AF5B3]) shadow-[inset_0_0_12px_#0D1512,0_0_6px_#0D1512] transition-all duration-300"
           @click="retake"
         >
           RE-ASSESS SYSTEM
@@ -132,13 +132,17 @@
           text-color="#0F1114"
           size="large"
           class="h-14 font-black tracking-widest shadow-lg shadow-emerald-400/20 hover:(bg-[#3DD497]) transition-all duration-300"
-          @click="showDrawer = !showDrawer"
+          @click="openDetails"
         >
           GET DETAILS
         </n-button>
       </div>
 
-      <div class="min-h-screen bg-[#101014] text-white mt-64">
+      <div
+        class="min-h-screen bg-[#101014] text-white mt-24"
+        v-show="showDrawer"
+        ref="detailsSection"
+      >
         <div class="mx-auto">
           <n-tabs type="card" animated class="custom-tabs">
             <n-tab-pane name="overview" tab="Hierarchical Analysis">
@@ -154,15 +158,15 @@
             </n-tab-pane>
 
             <n-tab-pane name="impact" tab="Impact Scope Analysis">
-              <div class="mt-6"></div>
+              <impactScopeAnalysis class="mt-8" />
             </n-tab-pane>
 
             <n-tab-pane name="stride" tab="STRIDE Analysis">
-              <div class="mt-6"></div>
+              <strideAnalysis class="mt-8" />
             </n-tab-pane>
 
             <n-tab-pane name="tech" tab="Technical Impact Analysis">
-              <div class="mt-6"></div>
+              <techImpactAnalysis class="mt-8" />
             </n-tab-pane>
           </n-tabs>
         </div>
@@ -172,16 +176,20 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { NProgress, NButton, NTabs, NTabPane } from "naive-ui";
 import { useAssessmentStore } from "../stores/assessmentStore";
 import detailedAnalysis from "../components/detailedAnalysis.vue";
 import owaspAnalysis from "../components/OWASP_analysis.vue";
+import impactScopeAnalysis from "../components/IS_analysis.vue";
+import strideAnalysis from "../components/STRIDE_analysis.vue";
+import techImpactAnalysis from "../components/TI_Analysis.vue";
 
 const store = useAssessmentStore();
 const router = useRouter();
 const showDrawer = ref(false);
+const detailsSection = ref(null);
 
 const config = computed(() => store.config);
 const score = computed(() => Number(store.finalReport?.soiScore) || 0);
@@ -202,26 +210,94 @@ function retake() {
   store.$reset();
   router.push({ name: "Input" });
 }
+
+function openDetails() {
+  // 1. Luôn đảm bảo Drawer được mở khi ấn nút này
+  showDrawer.value = true;
+
+  // 2. Đợi Vue cập nhật DOM (nextTick)
+  nextTick(() => {
+    const el = detailsSection.value;
+    if (!el) return;
+
+    // 3. Sử dụng scrollIntoView để cuộn
+    // block: 'start' sẽ đưa đỉnh phần tử lên đầu màn hình
+    el.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  });
+}
 </script>
 
 <style scoped>
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.02);
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #63e2b7;
   border-radius: 10px;
 }
+
 :deep(.n-collapse-item-arrow) {
   color: #fff !important;
 }
+
 :deep(.n-collapse) {
   border: none !important;
 }
+
 :deep(.n-collapse-item) {
   border: none !important;
+}
+
+/* Ghi đè màu nền và viền của toàn bộ thanh Tabs */
+:deep(.n-tabs.custom-tabs .n-tabs-nav) {
+  background-color: transparent;
+}
+
+/* Tab trạng thái bình thường (Inactive) */
+:deep(.n-tabs.custom-tabs .n-tabs-tab) {
+  background-color: rgba(255, 255, 255, 0.03) !important; /* Nền tối mờ */
+  color: #94a3b8 !important; /* Chữ xám xanh */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s ease;
+  margin-right: 4px;
+}
+
+/* Tab khi di chuột qua (Hover) */
+:deep(.n-tabs.custom-tabs .n-tabs-tab:hover) {
+  color: #5eead4 !important;
+  background-color: rgba(94, 234, 212, 0.05) !important;
+}
+
+/* Tab đang được chọn (Active) */
+:deep(.n-tabs.custom-tabs .n-tabs-tab.n-tabs-tab--active) {
+  background-color: #1a1a1e !important; /* Trùng với nền hoặc sáng hơn tí */
+  color: #5eead4 !important; /* Chữ Xanh Mint */
+  border: 1px solid #5eead4 !important; /* Viền Xanh Mint */
+  font-weight: 600;
+  border-bottom: 2px solid #5eead4 !important; /* Nhấn mạnh chân tab */
+}
+
+/* Xóa bỏ các đường line mặc định của Naive UI nếu cần */
+:deep(.n-tabs-pad) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+:deep(.n-tabs-tab-pad) {
+  border: none !important;
+  width: 0 !important; /* Triệt tiêu luôn khoảng cách nếu nó gây ra vạch */
+}
+
+div[ref="detailsSection"],
+.min-h-screen.mt-24 {
+  /* Hoặc dùng class cụ thể */
+  scroll-margin-top: 40px;
 }
 </style>

@@ -51,19 +51,17 @@
 
       <div v-if="currentChapter">
         <div class="mb-10">
-          <h1
-            class="text-3xl font-bold text-gray-100 flex items-baseline gap-4"
-          >
-            <span class="text-[#63e2b7] shrink-0 font-mono text-4xl"
+          <h1 class="font-bold text-gray-100 flex items-baseline gap-4">
+            <span class="text-[#63e2b7] shrink-0 font-mono text-3xl"
               >V{{ getChapterNumber(currentChapter) }}</span
             >
             <span
-              class="border-l border-gray-800 pl-5 capitalize font-semibold tracking-tight"
+              class="text-2xl border-l border-gray-800 pl-5 capitalize font-semibold tracking-tight"
             >
               {{ currentChapter.chapterName }}
             </span>
           </h1>
-          <p class="text-gray-500 italic mt-4 ml-20 text-lg">
+          <p class="text-gray-500 italic mt-4 ml-16 text-lg">
             This chapter contains
             <span class="text-[#63e2b7] font-bold">{{
               currentChapter.requirements.length
@@ -76,7 +74,7 @@
           </p>
         </div>
 
-        <div class="space-y-8 bg-[#18181c]/30 pt-2 pb-8 rounded-3xl">
+        <div class="space-y-8 bg-[#18181c]/30 pb-8 rounded-3xl">
           <ClickCriteria
             v-for="req in currentChapter.requirements"
             :key="req.id"

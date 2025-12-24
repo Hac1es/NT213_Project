@@ -139,7 +139,7 @@
       >
         <div class="absolute top-0 left-0 w-1 h-full bg-[#63e2b7]"></div>
         <h3
-          class="text-xl font-semibold text-white mb-2 flex items-center gap-2"
+          class="text-lg font-semibold text-white mb-2 flex items-center gap-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@
           </svg>
           Evaluation Guidelines
         </h3>
-        <p class="text-gray-300 text-lg leading-relaxed">
+        <p class="text-gray-300 leading-relaxed">
           The ASVS standard covers a wide range of security controls. It is
           important to note that
           <span class="text-white font-medium"
@@ -168,10 +168,10 @@
         <div
           class="mt-4 flex items-center gap-3 p-3 bg-[#101014]/50 rounded border border-gray-800"
         >
-          <span class="text-lg font-bold text-gray-500 uppercase tracking-wide"
+          <span class="font-bold text-gray-500 uppercase tracking-wide"
             >Action:</span
           >
-          <p class="text-lg text-gray-400">
+          <p class="text-gray-400">
             Simply leave these items
             <span class="text-white font-bold border-b border-gray-500"
               >unchecked</span

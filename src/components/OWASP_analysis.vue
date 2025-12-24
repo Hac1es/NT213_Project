@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h2 class="text-[#63e2b7] text-4xl font-black mb-3">
+    <h2 class="text-[#63e2b7] text-3xl font-black mb-3">
       Security Risk Summary
     </h2>
 
-    <p class="text-gray-400 text-lg font-black mb-8">
+    <p class="text-gray-400 text-base font-black mb-8">
       Based on OWASP Top 10 (2025)
     </p>
 
@@ -66,7 +66,7 @@
             </td>
             <td class="py-4 text-center">
               <span
-                class="inline-block px-3 py-1 rounded-full font-bold text-sm"
+                class="inline-block px-3 py-1 rounded-full font-bold text-xs"
                 :class="
                   idx === 0
                     ? 'bg-red-500/20 text-red-400'

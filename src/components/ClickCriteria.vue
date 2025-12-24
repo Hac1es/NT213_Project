@@ -2,31 +2,19 @@
   <div
     class="w-full flex flex-col gap-3 mt-6 border-b border-gray-800/60 pb-6 last:border-0"
   >
-    <div class="flex gap-4 w-full text-white text-xl items-baseline">
-      <span class="font-bold text-[#63e2b7] shrink-0 min-w-[70px]">
+    <div class="flex gap-4 w-full text-white items-baseline">
+      <span class="font-bold text-[#63e2b7] shrink-0 min-w-17.5 text-xl">
         {{ heading }}
       </span>
 
       <div class="flex-1 min-w-0 flex flex-col gap-2">
-        <span class="break-words text-gray-200 leading-relaxed">
+        <span class="wrap-break-word text-gray-200 leading-relaxed text-lg">
           {{ title }}
         </span>
-
-        <div v-if="reference" class="text-sm text-gray-500 mt-1">
-          <span>Ref: </span>
-          <a
-            :href="reference"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-[#70c0e8] hover:text-[#63e2b7] hover:underline break-all transition-colors"
-          >
-            {{ reference }}
-          </a>
-        </div>
       </div>
     </div>
 
-    <div class="flex gap-3 mt-2 pl-[86px]">
+    <div class="flex gap-3 mt-2 pl-22">
       <n-button
         @click="handleClick(0)"
         :type="selected === 0 ? 'error' : 'default'"
