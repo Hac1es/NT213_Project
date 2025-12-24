@@ -138,117 +138,33 @@
         </n-button>
       </div>
 
-      <div class="mt-32" v-show="showDrawer">
-        <h1 class="text-[#63e2b7] text-4xl font-black">
-          Detailed Hierarchical Analysis
-        </h1>
-        <div class="space-y-8 mt-6">
-          <div v-for="aspect in chapterScores" :key="aspect.aspect">
-            <h3
-              class="text-[#10b981] font-bold text-xl mb-4 flex items-center gap-2 uppercase tracking-tight"
-            >
-              {{ aspect.aspect }}
-            </h3>
-            <mainChart :aspectData="[aspect]" class="mb-6" />
-            <n-collapse arrow-placement="right">
-              <n-collapse-item
-                v-for="(crit, index) in aspect.criteriaDetails"
-                :key="crit.name"
-                :title="crit.name"
-                :name="crit.name"
-              >
-                <template #header>
-                  <span class="text-[#99F6E4] text-lg font-bold">{{
-                    crit.name
-                  }}</span>
-                </template>
+      <div class="min-h-screen bg-[#101014] text-white mt-64">
+        <div class="mx-auto">
+          <n-tabs type="card" animated class="custom-tabs">
+            <n-tab-pane name="overview" tab="Hierarchical Analysis">
+              <detailedAnalysis
+                :chapterScores="chapterScores"
+                :results="store.results"
+                class="mt-8"
+              />
+            </n-tab-pane>
 
-                <template #header-extra>
-                  <span
-                    class="text-lg font-mono font-bold"
-                    :class="
-                      crit.score >= 0.695 ? 'text-green-500' : 'text-red-500'
-                    "
-                    >{{ crit.score.toFixed(2) }}</span
-                  >
-                </template>
-                <!-- Element level collapse -->
-                <n-collapse arrow-placement="right">
-                  <n-collapse-item
-                    v-for="elem in crit.elementsDetails"
-                    :key="elem.name"
-                    :title="elem.name"
-                    :name="elem.name"
-                    class="py-1"
-                  >
-                    <template #header>
-                      <span class="text-[#CBD5E1] text-base font-bold">{{
-                        elem.name
-                      }}</span>
-                    </template>
-                    <template #header-extra>
-                      <span
-                        class="text-base font-mono font-bold"
-                        :class="
-                          elem.score >= 0.695
-                            ? 'text-green-500'
-                            : 'text-red-500'
-                        "
-                      >
-                        {{ elem.score.toFixed(2) }}
-                      </span>
-                    </template>
+            <n-tab-pane name="owasp" tab="OWASP Top 10 Analysis">
+              <owaspAnalysis class="mt-8" />
+            </n-tab-pane>
 
-                    <!-- Mechanism level collapse inside element -->
-                    <n-collapse arrow-placement="right" class="ml-2">
-                      <n-collapse-item
-                        v-for="mech in elem.mechanismsDetails"
-                        :key="mech.name"
-                        :title="mech.name"
-                        :name="mech.name"
-                      >
-                        <template #header>
-                          <span class="text-[#94A3B8] text-sm font-bold">{{
-                            mech.name
-                          }}</span>
-                        </template>
-                        <template #header-extra>
-                          <span
-                            class="text-sm font-mono font-bold"
-                            :class="
-                              mech.score >= 0.695
-                                ? 'text-green-500'
-                                : 'text-red-500'
-                            "
-                          >
-                            {{
-                              mech.score != null ? mech.score.toFixed(2) : "N/A"
-                            }}
-                          </span>
-                        </template>
+            <n-tab-pane name="impact" tab="Impact Scope Analysis">
+              <div class="mt-6"></div>
+            </n-tab-pane>
 
-                        <!-- ASVS requirement tags inside mechanism -->
-                        <div class="flex flex-wrap gap-2 py-1">
-                          <n-tag
-                            v-for="rid in mech.requirements"
-                            :key="rid"
-                            size="small"
-                            round
-                            :color="getTagColor(getReqScore(rid))"
-                          >
-                            {{ rid }}
-                            <span class="ml-1 opacity-70"
-                              >({{ getReqScore(rid) ?? "N/A" }})</span
-                            >
-                          </n-tag>
-                        </div>
-                      </n-collapse-item>
-                    </n-collapse>
-                  </n-collapse-item>
-                </n-collapse>
-              </n-collapse-item>
-            </n-collapse>
-          </div>
+            <n-tab-pane name="stride" tab="STRIDE Analysis">
+              <div class="mt-6"></div>
+            </n-tab-pane>
+
+            <n-tab-pane name="tech" tab="Technical Impact Analysis">
+              <div class="mt-6"></div>
+            </n-tab-pane>
+          </n-tabs>
         </div>
       </div>
     </div>
@@ -257,22 +173,13 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import {
-  NProgress,
-  NButton,
-  NDrawer,
-  NDrawerContent,
-  NCollapse,
-  NCollapseItem,
-  NTag,
-} from "naive-ui";
+import { useRouter } from "vue-router";
+import { NProgress, NButton, NTabs, NTabPane } from "naive-ui";
 import { useAssessmentStore } from "../stores/assessmentStore";
-import asvsData from "../assets/asvsData.json";
-import mainChart from "../components/mainChart.vue";
+import detailedAnalysis from "../components/detailedAnalysis.vue";
+import owaspAnalysis from "../components/OWASP_analysis.vue";
 
 const store = useAssessmentStore();
-const route = useRoute();
 const router = useRouter();
 const showDrawer = ref(false);
 
@@ -295,46 +202,6 @@ function retake() {
   store.$reset();
   router.push({ name: "Input" });
 }
-
-// Helpers for mechanism -> requirement drilldown
-const reqMap = computed(() => {
-  const map = {};
-  try {
-    asvsData.forEach((chapter) => {
-      (chapter.requirements || []).forEach((r) => {
-        map[r.id] = r.text;
-      });
-    });
-  } catch (e) {}
-  return map;
-});
-
-function getReqScore(id) {
-  const v = store.results?.[id];
-  return typeof v === "number" ? v : null;
-}
-
-const getTagColor = (s) => {
-  const map = {
-    1: {
-      color: "rgba(74, 222, 128, 0.1)",
-      textColor: "#4ADE80",
-      borderColor: "rgba(74, 222, 128, 0.2)",
-    },
-    0.5: {
-      color: "rgba(253, 224, 71, 0.1)", // vàng
-      textColor: "#FACC15",
-      borderColor: "rgba(253, 224, 71, 0.25)",
-    },
-    0: {
-      color: "rgba(248, 113, 113, 0.1)",
-      textColor: "#F87171",
-      borderColor: "rgba(248, 113, 113, 0.2)",
-    },
-  };
-
-  return map[s] ?? map[0];
-};
 </script>
 
 <style scoped>
