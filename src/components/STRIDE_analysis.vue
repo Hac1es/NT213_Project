@@ -1,6 +1,12 @@
 <template>
   <div>
-    <h2 class="text-[#63e2b7] text-3xl font-black mb-3">STRIDE Summary</h2>
+    <h2 class="text-[#63e2b7] text-3xl font-black mb-3 tracking-tighter">
+      Security Risk Summary
+    </h2>
+
+    <h2 class="text-gray-400 text-lg font-black mb-8 tracking-tighter">
+      Based on STRIDE Threat Model
+    </h2>
 
     <v-chart
       class="w-full"

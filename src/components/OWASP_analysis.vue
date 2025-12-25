@@ -127,8 +127,12 @@ const chartOption = computed(() => {
 
 <template>
   <div class="space-y-8 mt-8">
-    <h2 class="text-[#63e2b7] text-4xl font-black mb-8 tracking-tighter">
+    <h2 class="text-[#63e2b7] text-3xl font-black mb-3 tracking-tighter">
       Security Risk Summary
+    </h2>
+
+    <h2 class="text-gray-400 text-lg font-black mb-8 tracking-tighter">
+      Based on OWASP Top 10 (2025)
     </h2>
 
     <div
