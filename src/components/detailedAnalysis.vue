@@ -90,18 +90,33 @@
 
                     <!-- ASVS requirement tags inside mechanism -->
                     <div class="flex flex-wrap gap-2 py-1">
-                      <n-tag
+                      <n-tooltip
                         v-for="rid in mech.requirements"
                         :key="rid"
-                        size="small"
-                        round
-                        :color="getTagColor(getReqScore(rid))"
+                        trigger="hover"
+                        placement="top"
                       >
-                        {{ rid }}
-                        <span class="ml-1 opacity-70"
-                          >({{ getReqScore(rid) ?? "N/A" }})</span
-                        >
-                      </n-tag>
+                        <template #trigger>
+                          <n-tag
+                            size="small"
+                            round
+                            :color="getTagColor(getReqScore(rid))"
+                          >
+                            {{ rid }}
+                            <span class="ml-1 opacity-70"
+                              >({{ getReqScore(rid) ?? "N/A" }})</span
+                            >
+                          </n-tag>
+                        </template>
+                        <div style="max-width: 400px">
+                          <div class="font-bold mb-1">{{ rid }}</div>
+                          <div>
+                            {{
+                              getReqDetails(rid)?.text || "No details available"
+                            }}
+                          </div>
+                        </div>
+                      </n-tooltip>
                     </div>
                   </n-collapse-item>
                 </n-collapse>
@@ -115,8 +130,9 @@
 </template>
 
 <script setup>
-import { NCollapse, NCollapseItem, NTag } from "naive-ui";
+import { NCollapse, NCollapseItem, NTag, NTooltip } from "naive-ui";
 import mainChart from "./mainChart.vue";
+import asvsData from "../assets/asvsData.json";
 
 // Properly capture props in <script setup>
 const props = defineProps({
@@ -133,6 +149,14 @@ const props = defineProps({
 function getReqScore(id) {
   const v = props.results?.[id];
   return typeof v === "number" ? v : null;
+}
+
+function getReqDetails(id) {
+  for (const chapter of asvsData) {
+    const req = chapter.requirements.find((r) => r.id === id);
+    if (req) return req;
+  }
+  return null;
 }
 
 const getTagColor = (s) => {

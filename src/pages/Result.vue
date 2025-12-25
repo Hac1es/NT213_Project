@@ -52,6 +52,31 @@
           >
             {{ rating }}
           </div>
+
+          <!-- Criteria Statistics -->
+          <div class="mt-6 text-center space-y-2">
+            <p class="text-gray-400 text-sm">
+              Assessed
+              <span class="text-white font-bold">{{
+                criteriaStats.assessed
+              }}</span>
+              /
+              <span class="text-[#63e2b7] font-bold">{{
+                criteriaStats.total
+              }}</span>
+              criteria of Level
+              <span class="text-[#63e2b7] font-bold">{{
+                criteriaStats.level
+              }}</span>
+            </p>
+            <p class="text-gray-500 text-xs">
+              <span class="text-yellow-500 font-semibold">{{
+                criteriaStats.notApplicable
+              }}</span>
+              criteria marked as
+              <span class="text-white font-semibold">Not Applicable</span>
+            </p>
+          </div>
         </div>
 
         <div
@@ -180,6 +205,7 @@ import { ref, computed, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { NProgress, NButton, NTabs, NTabPane } from "naive-ui";
 import { useAssessmentStore } from "../stores/assessmentStore";
+import asvsData from "../assets/asvsData.json";
 import detailedAnalysis from "../components/detailedAnalysis.vue";
 import owaspAnalysis from "../components/OWASP_analysis.vue";
 import impactScopeAnalysis from "../components/IS_analysis.vue";
@@ -204,6 +230,39 @@ const ratingColor = computed(() => {
   if (s >= 7.0) return "text-blue-400 border-blue-400 bg-blue-400/10";
   if (s >= 4.0) return "text-yellow-500 border-yellow-500 bg-yellow-500/10";
   return "text-red-500 border-red-500 bg-red-500/10";
+});
+
+// Criteria statistics
+const criteriaStats = computed(() => {
+  const level = config.value.level;
+  const results = store.results || {};
+
+  // Get all requirements from asvsData
+  const allRequirements = asvsData.flatMap((ch) => ch.requirements);
+
+  // Total criteria for this level (criteria that include this level in their level array)
+  const criteriaForLevel = allRequirements.filter((req) =>
+    req.level?.includes(level)
+  );
+  const totalForLevel = criteriaForLevel.length;
+
+  // Assessed criteria = those with a valid score (0, 0.5, or 1) AND belong to this level
+  const assessedCount = Object.entries(results).filter(([id, val]) => {
+    const req = allRequirements.find((r) => r.id === id);
+    return req?.level?.includes(level) && [0, 0.5, 1].includes(val);
+  }).length;
+
+  // N/A criteria = criteria NOT in this level + criteria in level but user didn't assess
+  const criteriaNotInLevel = allRequirements.length - totalForLevel;
+  const criteriaInLevelButNotAssessed = totalForLevel - assessedCount;
+  const naCount = criteriaNotInLevel + criteriaInLevelButNotAssessed;
+
+  return {
+    assessed: assessedCount,
+    total: totalForLevel,
+    level: level,
+    notApplicable: naCount,
+  };
 });
 
 function retake() {
