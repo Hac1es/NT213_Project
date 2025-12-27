@@ -2,7 +2,7 @@
 
 ### Đồ án môn Bảo mật ứng dụng Web - NT213
 
-Hiện thực hóa bài báo: [A quantitative security evaluation model based on OWASP ASVS for software development - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S016740482300442X?ref=pdf_download&fr=RR-2&rr=9b3704eecfc9f876)
+Hiện thực hóa bài báo: [A quantitative security evaluation and analysis model for web applications based on OWASP application security verification standard - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S016740482300442X?ref=pdf_download&fr=RR-2&rr=9b3704eecfc9f876)
 
 ## Giới thiệu
 
