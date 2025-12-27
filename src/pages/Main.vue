@@ -210,8 +210,8 @@ async function calculateScore() {
 }
 
 function devQuickFill() {
-  // 1. Duyệt qua toàn bộ JSON để lấy hết ID
-  asvsData.forEach((chapter) => {
+  // 1. Duyệt qua dữ liệu ĐÃ LỌC theo Level để chỉ fill các câu thuộc level được chọn
+  filteredData.value.forEach((chapter) => {
     chapter.requirements.forEach((req) => {
       // 2. Random điểm 0, 0.5, 1 cho mỗi câu
       results[req.id] = [0, 0.5, 1][Math.floor(Math.random() * 3)];

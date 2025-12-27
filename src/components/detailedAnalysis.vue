@@ -10,7 +10,11 @@
         >
           {{ aspect.aspect }}
         </p>
-        <mainChart :aspectData="[aspect]" class="mb-6" />
+        <mainChart
+          :aspectData="[aspect]"
+          :level="store.config.level"
+          class="mb-6"
+        />
         <n-collapse arrow-placement="right">
           <n-collapse-item
             v-for="(crit, index) in aspect.criteriaDetails"
@@ -133,6 +137,9 @@
 import { NCollapse, NCollapseItem, NTag, NTooltip } from "naive-ui";
 import mainChart from "./mainChart.vue";
 import asvsData from "../assets/asvsData.json";
+import { useAssessmentStore } from "../stores/assessmentStore";
+
+const store = useAssessmentStore();
 
 // Properly capture props in <script setup>
 const props = defineProps({
@@ -178,7 +185,14 @@ const getTagColor = (s) => {
     },
   };
 
-  return map[s] ?? map[0];
+  // N/A (null) → màu xám thay vì đỏ
+  const naColor = {
+    color: "rgba(148, 163, 184, 0.1)",
+    textColor: "#94A3B8",
+    borderColor: "rgba(148, 163, 184, 0.2)",
+  };
+
+  return map[s] ?? naColor;
 };
 </script>
 
